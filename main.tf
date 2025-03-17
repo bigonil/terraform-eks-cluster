@@ -1,7 +1,7 @@
 # Create VPC
 resource "aws_vpc" "eks_vpc" {
-  cidr_block = var.vpc_cidr
-  enable_dns_support = true
+  cidr_block           = var.vpc_cidr
+  enable_dns_support   = true
   enable_dns_hostnames = true
 
   tags = {
@@ -12,9 +12,9 @@ resource "aws_vpc" "eks_vpc" {
 # Create Subnets
 resource "aws_subnet" "eks_subnets" {
   count = length(var.subnet_cidrs)
-  
-  vpc_id     = aws_vpc.eks_vpc.id
-  cidr_block = element(var.subnet_cidrs, count.index)
+
+  vpc_id                  = aws_vpc.eks_vpc.id
+  cidr_block              = element(var.subnet_cidrs, count.index)
   map_public_ip_on_launch = true
 
   tags = {
